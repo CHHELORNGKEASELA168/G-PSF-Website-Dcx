@@ -1,36 +1,91 @@
-'use client';
+// src/Components/UI-Homepage/WorkGroupsCarousel.tsx
+"use client";
 
-import React, { useRef, useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import type { Swiper as SwiperClass } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import React, { useRef, useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import type { Swiper as SwiperClass } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { useLanguage } from "@/app/context/LanguageContext";
 
 interface WorkGroup {
     id: number;
-    name: string;
+    nameEn: string;
+    nameKh: string;
     icon: string;
 }
 
 const workGroups: WorkGroup[] = [
-    { id: 1, name: 'Agriculture & Agro-Industry', icon: '🌿' },
-    { id: 2, name: 'Tourism', icon: '🧳' },
-    { id: 3, name: 'Manufacturing & SMEs', icon: '🏭' },
-    { id: 4, name: 'Law, Tax & Governance', icon: '⚖️' },
-    { id: 5, name: 'Banking & Financial Services', icon: '🏦' },
-    { id: 6, name: 'Transportation & Infrastructure', icon: '🚌' },
-    { id: 7, name: 'Healthcare', icon: '🏥' },
-    { id: 8, name: 'Education', icon: '🎓' },
+    {
+        id: 1,
+        nameEn: "Agriculture & Agro-Industry",
+        nameKh: "កសិកម្ម និងឧស្សាហកម្មកសិកម្ម",
+        icon: "🌿",
+    },
+    {
+        id: 2,
+        nameEn: "Tourism",
+        nameKh: "ទេសចរណ៍",
+        icon: "🧳",
+    },
+    {
+        id: 3,
+        nameEn: "Manufacturing & SMEs",
+        nameKh: "ផលិតកម្ម និងសហគ្រាសតូច និងមធ្យម",
+        icon: "🏭",
+    },
+    {
+        id: 4,
+        nameEn: "Law, Tax & Governance",
+        nameKh: "ច្បាប់ ពន្ធ និងការគ្រប់គ្រងរដ្ឋបាល",
+        icon: "⚖️",
+    },
+    {
+        id: 5,
+        nameEn: "Banking & Financial Services",
+        nameKh: "ធនាគារ និងសេវាហិរញ្ញវត្ថុ",
+        icon: "🏦",
+    },
+    {
+        id: 6,
+        nameEn: "Transportation & Infrastructure",
+        nameKh: "ដឹកជញ្ជូន និងហេដ្ឋារចនាសម្ព័ន្ធ",
+        icon: "🚌",
+    },
+    {
+        id: 7,
+        nameEn: "Healthcare",
+        nameKh: "សុខាភិបាល",
+        icon: "🏥",
+    },
+    {
+        id: 8,
+        nameEn: "Education",
+        nameKh: "អប់រំ",
+        icon: "🎓",
+    },
 ];
 
-const ICON_BG = '#4C518D';
+const ICON_BG = "#4C518D";
 
 const WorkGroupsCarousel: React.FC = () => {
     const prevRef = useRef<HTMLDivElement>(null);
     const nextRef = useRef<HTMLDivElement>(null);
-    const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(null);
+    const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
+        null
+    );
+
+    const { language } = useLanguage();
+    const isKhmer = language === "kh";
+
+    const headingEnLine1 = "16 Work Groups";
+    const headingEnLine2 = "Working For You";
+
+    const headingKhLine1 = "ក្រុមការងារ ១៦ ក្រុម";
+    const headingKhLine2 = "កំពុងធ្វើការសម្រាប់អ្នក";
 
     // Assign navigation elements after refs exist
     useEffect(() => {
@@ -50,8 +105,23 @@ const WorkGroupsCarousel: React.FC = () => {
             <div className="container mx-auto px-4 max-w-7xl relative">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-6xl font-extrabold text-blue-950">
-                        16 Work Groups <br />Working For You
+                    <h2
+                        className={`text-4xl md:text-6xl font-extrabold text-blue-950 ${isKhmer ? "khmer-font" : ""
+                            }`}
+                    >
+                        {isKhmer ? (
+                            <>
+                                {headingKhLine1}
+                                <br />
+                                {headingKhLine2}
+                            </>
+                        ) : (
+                            <>
+                                {headingEnLine1}
+                                <br />
+                                {headingEnLine2}
+                            </>
+                        )}
                     </h2>
                 </div>
 
@@ -84,7 +154,6 @@ const WorkGroupsCarousel: React.FC = () => {
                         nextEl: nextRef.current,
                     }}
                     breakpoints={{
-                        // 267: { slidesPerView: 2, spaceBetween: 8 },
                         368: { slidesPerView: 2, spaceBetween: 30 },
                         640: { slidesPerView: 3, spaceBetween: 10 },
                         768: { slidesPerView: 3, spaceBetween: 20 },
@@ -98,7 +167,8 @@ const WorkGroupsCarousel: React.FC = () => {
                             <div
                                 className="group flex flex-col items-center justify-center h-[190px] p-4 rounded-xl shadow-lg transition-transform duration-500 transform hover:shadow-2xl hover:scale-105 cursor-pointer"
                                 style={{
-                                    backgroundColor: group.id % 2 === 0 ? '#F5F6F7' : '#E9ECF0',
+                                    backgroundColor:
+                                        group.id % 2 === 0 ? "#F5F6F7" : "#E9ECF0",
                                 }}
                             >
                                 <div
@@ -107,8 +177,11 @@ const WorkGroupsCarousel: React.FC = () => {
                                 >
                                     {group.icon}
                                 </div>
-                                <p className="text-base text-center font-semibold text-gray-800 leading-snug px-2">
-                                    {group.name}
+                                <p
+                                    className={`text-base text-center font-semibold text-gray-800 leading-snug px-2 ${isKhmer ? "khmer-font" : ""
+                                        }`}
+                                >
+                                    {isKhmer ? group.nameKh : group.nameEn}
                                 </p>
                             </div>
                         </SwiperSlide>
