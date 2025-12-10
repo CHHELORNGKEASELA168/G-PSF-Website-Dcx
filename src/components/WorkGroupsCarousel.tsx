@@ -47,7 +47,7 @@ const WorkGroupsCarousel: React.FC = () => {
 
     return (
         <div className="py-20 bg-white relative">
-            <div className="container mx-auto px-12 relative">
+            <div className="container mx-auto px-4 max-w-7xl relative">
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h2 className="text-4xl md:text-6xl font-extrabold text-blue-950">
@@ -84,7 +84,7 @@ const WorkGroupsCarousel: React.FC = () => {
                         nextEl: nextRef.current,
                     }}
                     breakpoints={{
-                        267: { slidesPerView: 1, spaceBetween: 10 },
+                        // 267: { slidesPerView: 2, spaceBetween: 8 },
                         368: { slidesPerView: 2, spaceBetween: 30 },
                         640: { slidesPerView: 3, spaceBetween: 10 },
                         768: { slidesPerView: 3, spaceBetween: 20 },

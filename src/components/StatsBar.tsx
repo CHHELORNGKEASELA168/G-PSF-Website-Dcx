@@ -1,40 +1,39 @@
 // src/Components/StatsBar.tsx
 import React from 'react';
-// import { keyStats, KeyStat } from './Data/data';
 
 export interface KeyStat {
-  value: string;
-  label: string;
-  trend?: string;  // Optional: Trend for percentage change
-  color: string;   // CSS class for the text color (e.g., text-green-500)
+    value: string;
+    label: string;
+    trend?: string;  // Optional: Trend for percentage change
+    color: string;   // CSS class for the text color (e.g., text-green-500)
 }
 
 // Sample data for the stats
 export const keyStats: KeyStat[] = [
-  {
-    value: "1,268",
-    label: "Total Projects",
-    trend: "2.3%",  // Optional: Trend for the stat
-    color: "text-green-500",  // Text color class
-  },
-  {
-    value: "63",
-    label: "Sector Focus",
-    trend: "0.5%",
-    color: "text-blue-500",
-  },
-  {
-    value: "91.4%",
-    label: "Completion Rate",
-    trend: "1.1%",
-    color: "text-yellow-500",
-  },
-  {
-    value: "48",
-    label: "Active Zones",
-    trend: "3.5%",
-    color: "text-red-500",
-  },
+    {
+        value: "1,268",
+        label: "Total Projects",
+        trend: "2.3%",  // Optional: Trend for the stat
+        color: "text-green-500",  // Text color class
+    },
+    {
+        value: "63",
+        label: "Sector Focus",
+        trend: "0.5%",
+        color: "text-blue-500",
+    },
+    {
+        value: "91.4%",
+        label: "Completion Rate",
+        trend: "1.1%",
+        color: "text-yellow-500",
+    },
+    {
+        value: "48",
+        label: "Active Zones",
+        trend: "3.5%",
+        color: "text-red-500",
+    },
 ];
 
 // Type the props of the StatItem component

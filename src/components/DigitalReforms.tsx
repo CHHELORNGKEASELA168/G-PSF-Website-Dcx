@@ -33,7 +33,7 @@ const DigitalReforms: React.FC = () => {
     return (
         <>
             {/* Header Section */}
-            <div className="text-center mb-90 mt-32">
+            <div className="text-center mb-90 mt-20">
                 <p className="text-xl font-medium text-indigo-600 uppercase tracking-wider">
                     Policy Update
                 </p>
@@ -49,7 +49,7 @@ const DigitalReforms: React.FC = () => {
                 className="bg-darkBlue h-[220px] flex flex-col justify-end relative"
                 style={{ backgroundColor: DARK_BLUE }}
             >
-                <div className="container mx-auto px-4 py-8">
+                <div className="container mx-auto px-4 max-w-7xl py-8">
                     <Swiper
                         modules={[Navigation, Pagination]}
                         slidesPerView={1}

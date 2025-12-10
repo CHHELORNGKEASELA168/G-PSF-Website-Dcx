@@ -68,7 +68,7 @@ const GrowthVision: React.FC = () => {
     const secondaryCards = growthVisionData.filter(d => !d.isPrimary);
 
     return (
-        <div className="container mx-auto p-4 py-16 relative">
+        <div className="container mx-auto px-4 max-w-7xl py-16 relative">
             <h2 className="text-5xl font-extrabold text-indigo-900 mb-12">
                 Align With Cambodia’s <br /> Growth Vision
             </h2>

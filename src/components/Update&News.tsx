@@ -46,7 +46,7 @@ const Update_News: React.FC = () => {
                 className="bg-darkBlue h-[220px] flex flex-col justify-end relative"
                 style={{ backgroundColor: DARK_BLUE }}
             >
-                <div className="container mx-auto px-4 py-8">
+                <div className="container mx-auto px-4 max-w-7xl py-8">
                     <Swiper
                         modules={[Navigation, Pagination]}  // Using Swiper modules
                         slidesPerView={1}
@@ -61,31 +61,31 @@ const Update_News: React.FC = () => {
                         className="custom-swiper-pagination-white "
                     >
                         {contentItems.map((item, index) => (
-    <SwiperSlide key={index} className="pb-12 pt-16">
-        <div
-            className={`
-                bg-white overflow-hidden rounded-lg relative pt-12 h-[360px] flex flex-col
-                transition-transform duration-500 ease-out
-                hover:-translate-y-3 hover:shadow-2xl hover:scale-[1.02] cursor-pointer
-            `}
-            style={{ boxShadow: '0 7px 15px rgba(0,0,0,0.4)' }}
-        >
-            <div
-                className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-40 pt-5 rounded-full border-4 border-white"
-                style={{ backgroundColor: DARK_BLUE, borderColor: 'white' }}
-            >
-                <div className="flex items-center justify-center w-full h-[160px] text-white text-4xl">
-                    {item.icon}
-                </div>
-            </div>
+                            <SwiperSlide key={index} className="pb-12 pt-16">
+                                <div
+                                    className={`
+                                        bg-white overflow-hidden rounded-lg relative pt-12 h-[360px] flex flex-col
+                                        transition-transform duration-500 ease-out
+                                        hover:-translate-y-3 hover:shadow-2xl hover:scale-[1.02] cursor-pointer
+                                    `}
+                                    style={{ boxShadow: '0 7px 15px rgba(0,0,0,0.4)' }}
+                                >
+                                    <div
+                                        className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-40 pt-5 rounded-full border-4 border-white"
+                                        style={{ backgroundColor: DARK_BLUE, borderColor: 'white' }}
+                                    >
+                                        <div className="flex items-center justify-center w-full h-[160px] text-white text-4xl">
+                                            {item.icon}
+                                        </div>
+                                    </div>
 
-            <div className="p-6 pt-10">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-base">{item.content}</p>
-            </div>
-        </div>
-    </SwiperSlide>
-))}
+                                    <div className="p-6 pt-10">
+                                        <h3 className="text-xl font-bold text-gray-800 mb-4">{item.title}</h3>
+                                        <p className="text-gray-600 leading-relaxed text-base">{item.content}</p>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        ))}
 
 
                     </Swiper>
