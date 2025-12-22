@@ -101,7 +101,7 @@ const Header: FC = () => {
 
                             <button
                                 onClick={() => setIsSearchOpen((s) => !s)}
-                                className="lg:hidden p-2"
+                                className="lg:hidden p-2 mr-3"
                                 type="button"
                             >
                                 <Search className="w-5 h-5 text-gray-600" />
@@ -132,14 +132,14 @@ const Header: FC = () => {
 
                         {/* Mobile menu title */}
                         <div
-                            className={`lg:hidden font-medium text-gray-500 uppercase tracking-wide ${language === "kh" ? "khmer-font text-xs" : "text-[10px] sm:text-xs"
+                            className={`lg:hidden ml-3 font-medium text-gray-500 uppercase tracking-wide ${language === "kh" ? "khmer-font text-xs" : "text-[10px] sm:text-xs"
                                 }`}
                         >
                             {language === "en" ? "Menu" : "ម៉ឺនុយ"}
                         </div>
 
                         {/* Right controls */}
-                        <div className="flex items-center gap-2 mr-5">
+                        <div className="flex items-center gap-2 mr-3">
                             {/* show these when scroll down */}
                             {isSticky && (
                                 <>
