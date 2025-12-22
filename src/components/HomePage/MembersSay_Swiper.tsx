@@ -123,7 +123,7 @@ const MembersSaySwiperSlider: React.FC = () => {
                     640: { slidesPerView: 2, spaceBetween: 20 },
                     768: { slidesPerView: 2, spaceBetween: 25 },
                     1024: { slidesPerView: 3, spaceBetween: 30 },
-                    1200: { slidesPerView: 4, spaceBetween: 40 },
+                    1200: { slidesPerView: 3.4, spaceBetween: 40 },
                 }}
                 autoplay={{ delay: 2000, disableOnInteraction: false }}
                 className="pb-12"

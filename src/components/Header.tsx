@@ -1,176 +1,273 @@
 "use client";
 
-import { useState, type FC } from "react";
+import { useState, useEffect, type FC } from "react";
 import Image from "next/image";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, Globe } from "lucide-react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import Link from "next/link";
 
 type Lang = "en" | "kh";
 
 const Header: FC = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isSticky, setIsSticky] = useState(false);
 
-    // Get language + toggle from context
     const { language, toggleLanguage } = useLanguage();
 
-    // NAV ITEMS IN BOTH LANGUAGES
-    const navItems: Record<Lang, string[]> = {
+    type NavItem = { label: string; href: string };
+
+    const navItems: Record<Lang, NavItem[]> = {
         en: [
-            "Home",
-            "About Us",
-            "Working Groups (WGs)",
-            "Resources",
-            "News & Updates",
-            "MIS Dashboard",
-            "Contact Us",
+            { label: "Home", href: "/" },
+            { label: "About Us", href: "/about-us" },
+            { label: "Working Groups (WGs)", href: "/working-groups" },
+            { label: "Resources", href: "/resources" },
+            { label: "News & Updates", href: "/news" },
+            { label: "MIS Dashboard", href: "/mis-dashboard" },
+            { label: "Contact Us", href: "/contact-us" },
         ],
         kh: [
-            "ទំព័រដើម",
-            "អំពីពួកយើង",
-            "ក្រុមការងារ (WGs)",
-            "ធនធាន",
-            "ព័ត៌មាន និងបច្ចុប្បន្នភាព",
-            "ផ្ទាំង MIS",
-            "ទាក់ទងមកពួកយើង",
+            { label: "ទំព័រដើម", href: "/" },
+            { label: "អំពីពួកយើង", href: "/about-us" },
+            { label: "ក្រុមការងារ (WGs)", href: "/working-groups" },
+            { label: "ធនធាន", href: "/resources" },
+            { label: "ព័ត៌មាន និងបច្ចុប្បន្នភាព", href: "/news" },
+            { label: "ផ្ទាំង MIS", href: "/mis-dashboard" },
+            { label: "ទាក់ទងមកពួកយើង", href: "/contact-us" },
         ],
     };
 
     const searchPlaceholder = language === "en" ? "Search..." : "ស្វែងរក...";
 
-    // change these to real flag images when you have them
-    const flagSrc = language === "en" ? "/image/flagen.png" : "/image/flagkhmer.jpg";
-    const flagAlt = language === "en" ? "English flag" : "Cambodian flag";
+    // ✅ Sticky scroll detect (smooth)
+    useEffect(() => {
+        let ticking = false;
+
+        const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+
+            requestAnimationFrame(() => {
+                const next = window.scrollY > 20;
+                setIsSticky((prev) => (prev === next ? prev : next));
+                ticking = false;
+            });
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     return (
-        <header className="bg-white shadow-md">
-            {/* Top Bar */}
-            <div className="max-w-screen-3xl mx-auto px-5 md:px-32 py-2 flex flex-col md:flex-row justify-between items-center">
-                {/* Logo */}
-                <div className="flex items-center mb-2 md:mb-0">
-                    <Image
-                        src="/image/logo2.png"
-                        alt="G-PSF Logo"
-                        width={150}
-                        height={60}
-                        className="object-contain"
-                    />
-                </div>
+        <>
+            {/* ===== TOP BAR ===== */}
+            <header className="bg-white shadow-md">
+                <div
 
-                {/* Top Right Controls */}
-                <div className="flex items-center space-x-4 w-full md:w-auto justify-between md:justify-normal">
-                    {/* Flag + Language (flag outside, button text toggles) */}
-                    <div className="flex items-center space-x-2">
+                >
+                    <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-2 xl:px-2 py-2 flex flex-col md:flex-row gap-3 md:gap-0 justify-between items-center">
                         <Image
-                            src={flagSrc}
-                            alt={flagAlt}
-                            width={38}
-                            height={20}
-                            className="rounded-sm object-cover "
+                            src="/image/logo2.png"
+                            alt="G-PSF Logo"
+                            width={150}
+                            height={60}
+                            className="object-contain"
+                            priority
                         />
 
-                        <button
-                            type="button"
-                            onClick={toggleLanguage}
-                            className={`px-3 py-1 rounded-full border border-gray-300 hover:bg-gray-100 transition text-sm md:text-lg font-medium ${language === "kh" ? "khmer-font" : ""
-                                }`}
-                        >
-                            {language === "en" ? "English" : "ខ្មែរ"}
-                        </button>
-                    </div>
-
-                    {/* Desktop Search */}
-                    <div className="hidden lg:flex rounded-2xl overflow-hidden w-0 md:w-72 shadow-sm">
-                        <input
-                            type="text"
-                            placeholder={searchPlaceholder}
-                            className="flex-1 px-3 py-1 text-sm md:text-lg bg-gray-200 outline-none"
-                        />
-                        <button className="px-3 py-2 bg-white flex items-center justify-center">
-                            <Search className="w-6 md:w-7 h-6 md:h-5 text-gray-500" />
-                        </button>
-                    </div>
-
-                    {/* Mobile Search Icon */}
-                    <button
-                        onClick={() => setIsSearchOpen(!isSearchOpen)}
-                        className="lg:hidden p-2"
-                    >
-                        <Search className="w-5 h-5 text-gray-600" />
-                    </button>
-                </div>
-            </div>
-
-            {/* Mobile Search Bar */}
-            {isSearchOpen && (
-                <div className="lg:hidden border-t px-4 py-3 bg-gray-50">
-                    <div className="flex items-center rounded-lg px-3 py-2 w-full">
-                        <Search className="w-4 h-4 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder={searchPlaceholder}
-                            className="ml-2 outline-none bg-transparent w-full text-base"
-                        />
-                    </div>
-                </div>
-            )}
-
-            {/* Main Navigation */}
-            <nav className="container mx-auto px-4 md:px-8 py-5">
-                <div className="flex justify-between items-center">
-                    {/* Mobile Logo Text */}
-                    <div
-                        className={`lg:hidden text-base text-gray-600 ${language === "kh" ? "khmer-font" : ""
-                            }`}
-                    >
-                        {language === "en"
-                            ? "Government Private Sector Forum"
-                            : "វេទិការដ្ឋាភិបាល និងវិស័យឯកជន"}
-                    </div>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden lg:flex flex-1 flex-wrap justify-center gap-x-12 gap-y-1 mb-5">
-                        {navItems[language].map((item) => (
-                            <a
-                                key={item}
-                                href="#"
-                                className={`text-gray-700 hover:text-blue-600 font-medium text-base md:text-lg lg:text-lg transition-colors ${language === "kh" ? "khmer-font" : ""
+                        <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+                            <button
+                                onClick={toggleLanguage}
+                                className={`flex items-center gap-1 px-3 py-1 rounded-full border text-sm md:text-lg ${language === "kh" ? "khmer-font" : ""
                                     }`}
+                                type="button"
                             >
-                                {item}
-                            </a>
-                        ))}
+                                <Globe className="w-4 h-4" />
+                                {language === "en" ? "English" : "ខ្មែរ"}
+                            </button>
+
+                            <div className="hidden lg:flex rounded-2xl overflow-hidden md:w-72 shadow-sm">
+                                <input
+                                    type="text"
+                                    placeholder={searchPlaceholder}
+                                    className="flex-1 px-3 py-1 text-sm md:text-lg bg-gray-200 outline-none"
+                                />
+                                <button className="px-3 bg-white" type="button">
+                                    <Search className="w-5 h-5 text-gray-500" />
+                                </button>
+                            </div>
+
+                            <button
+                                onClick={() => setIsSearchOpen((s) => !s)}
+                                className="lg:hidden p-2"
+                                type="button"
+                            >
+                                <Search className="w-5 h-5 text-gray-600" />
+                            </button>
+                        </div>
                     </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="lg:hidden p-2"
-                    >
-                        {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
                 </div>
+            </header>
 
-                {/* Mobile Navigation Menu */}
-                {isMenuOpen && (
-                    <div className="lg:hidden mt-4 pb-4 border-t bg-white">
-                        <div className="flex flex-col space-y-2 pt-2">
+            {/* ===== NAVBAR (Sticky) ===== */}
+            {/* ===== NAVBAR (Sticky) ===== */}
+            <section className="bg-white shadow-md sticky top-0 z-50">
+                <nav className="max-w-7xl mx-auto px-4 md:px-2 py-4">
+                    <div className="flex justify-between items-center">
+                        {/* Desktop links */}
+                        <div className="hidden lg:flex flex-1 justify-center gap-x-12">
                             {navItems[language].map((item) => (
-                                <a
-                                    key={item}
-                                    href="#"
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className={`text-gray-700 hover:text-blue-600 font-medium py-2 px-3 rounded text-base transition duration-200 ${language === "kh" ? "khmer-font" : ""
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className={`text-gray-700 hover:text-blue-600 font-medium text-xl ${language === "kh" ? "khmer-font" : ""
                                         }`}
                                 >
-                                    {item}
-                                </a>
+                                    {item.label}
+                                </Link>
                             ))}
+                        </div>
+
+                        {/* Mobile menu title */}
+                        <div
+                            className={`lg:hidden font-medium text-gray-500 uppercase tracking-wide ${language === "kh" ? "khmer-font text-xs" : "text-[10px] sm:text-xs"
+                                }`}
+                        >
+                            {language === "en" ? "Menu" : "ម៉ឺនុយ"}
+                        </div>
+
+                        {/* Right controls */}
+                        <div className="flex items-center gap-2 mr-5">
+                            {/* show these when scroll down */}
+                            {isSticky && (
+                                <>
+                                    <button
+                                        onClick={() => setIsSearchOpen((s) => !s)}
+                                        className="p-2 rounded-md hover:bg-gray-100"
+                                        type="button"
+                                        aria-label="Search"
+                                    >
+                                        <Search className="w-5 h-5 text-gray-600" />
+                                    </button>
+
+                                    <button
+                                        onClick={toggleLanguage}
+                                        className="flex items-center gap-1 px-2 py-1 border rounded-md text-sm hover:bg-gray-50"
+                                        type="button"
+                                        aria-label="Language"
+                                    >
+                                        <Globe className="w-4 h-4" />
+                                        {language === "en" ? "EN" : "KH"}
+                                    </button>
+                                </>
+                            )}
+
+                            {/* ✅ Mobile menu button */}
+                            <button
+                                onClick={() => {
+                                    setIsMenuOpen((m) => !m);
+                                    setIsSearchOpen(false);
+                                }}
+                                className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+                                type="button"
+                                aria-label="Menu"
+                            >
+                                {isMenuOpen ? (
+                                    <X className="w-6 h-6 text-gray-700" />
+                                ) : (
+                                    <Menu className="w-6 h-6 text-gray-700" />
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+
+                {/* Search bar dropdown */}
+                {isSearchOpen && (
+                    <div className="border-t border-gray-200 px-4 py-3 bg-gray-100">
+                        <div className="max-w-7xl mx-auto flex items-center rounded-lg px-4 py-2 bg-white">
+                            <Search className="w-4 h-4 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder={searchPlaceholder}
+                                className="ml-2 outline-none bg-transparent w-full"
+                            />
                         </div>
                     </div>
                 )}
-            </nav>
-        </header>
+
+                {/* ✅ Mobile menu */}
+                {/* ✅ Mobile menu (Backdrop + Drawer) */}
+                {isMenuOpen && (
+                    <div className="lg:hidden fixed inset-0 z-[60]">
+                        {/* Backdrop */}
+                        <button
+                            type="button"
+                            aria-label="Close menu"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="absolute inset-0 bg-black/40"
+                        />
+
+                        {/* Drawer */}
+                        <div className="absolute right-0 top-0 h-full w-[86%] max-w-[340px] bg-white shadow-2xl">
+                            {/* Drawer header */}
+                            <div className="flex items-center justify-between px-4 py-4 border-b">
+                                <div
+                                    className={`font-semibold text-gray-800 ${language === "kh" ? "khmer-font" : ""
+                                        }`}
+                                >
+                                    {language === "en" ? "Menu" : "ម៉ឺនុយ"}
+                                </div>
+
+                                <button
+                                    type="button"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="p-2 rounded-md hover:bg-gray-100"
+                                    aria-label="Close"
+                                >
+                                    <X className="w-6 h-6 text-gray-700" />
+                                </button>
+                            </div>
+
+                            {/* Links */}
+                            <div className="p-3">
+                                <div className="flex flex-col gap-1">
+                                    {navItems[language].map((item) => (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className={`flex items-center justify-between rounded-xl px-4 py-3 text-gray-800 hover:bg-gray-100 ${language === "kh" ? "khmer-font" : ""
+                                                }`}
+                                        >
+                                            <span className="font-medium">{item.label}</span>
+                                            <span className="text-gray-400">›</span>
+                                        </Link>
+                                    ))}
+                                </div>
+
+                                {/* Extra actions */}
+                                <div className="mt-4 border-t pt-4">
+                                    <button
+                                        onClick={toggleLanguage}
+                                        type="button"
+                                        className={`w-full flex items-center justify-center gap-2 rounded-xl border px-4 py-3 hover:bg-gray-50 ${language === "kh" ? "khmer-font" : ""
+                                            }`}
+                                    >
+                                        <Globe className="w-4 h-4" />
+                                        {language === "en" ? "Switch to Khmer" : "ប្ដូរទៅ English"}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+            </section>
+
+        </>
     );
 };
 

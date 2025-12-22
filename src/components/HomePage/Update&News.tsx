@@ -65,6 +65,15 @@ const contentItems: ContentItem[] = [
       "អត្ថបទគំរូសម្រាប់បង្ហាញមាតិកាដោយសង្ខេប សូមបញ្ចូលមាតិកាពិតនៅទីនេះ។",
     icon: "📰",
   },
+  {
+    titleEn: "Results & Achievements",
+    titleKh: "លទ្ធផល និងសមិទ្ធិផល",
+    contentEn:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.",
+    contentKh:
+      "អត្ថបទគំរូសម្រាប់បង្ហាញមាតិកាដោយសង្ខេប សូមបញ្ចូលមាតិកាពិតនៅទីនេះ។",
+    icon: "📊",
+  },
 ];
 
 const DARK_BLUE = "#1A1D42";
