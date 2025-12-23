@@ -11,11 +11,11 @@ const SubmissionForm: React.FC = () => {
     const topLine =
         language === "en"
             ? "Submit an Issue for Reform"
-            : "កន្លែងរបស់អ្នកនៅលើតុពិភាក្សាការកែទម្រង់កំពូលរបស់កម្ពុជា។";
+            : "ដាក់ស្នើបញ្ហាសម្រាប់ការកែទម្រង់";
     const buttonLabel =
         language === "en"
             ? "Submission Form"
-            : "កំណែទម្រង់ឌីជីថលចុងក្រោយ";
+            : "ទម្រង់ដាក់ស្នើ";
 
     return (
         <div className="relative mb-27 mt-25 opacity-110 min-h-140 flex flex-col items-center justify-start overflow-hidden bg-gray-100">

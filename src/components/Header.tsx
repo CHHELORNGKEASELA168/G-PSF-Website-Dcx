@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Menu, X, Search, Globe } from "lucide-react";
 import { useLanguage } from "@/app/context/LanguageContext";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 
 type Lang = "en" | "kh";
 
@@ -59,7 +61,7 @@ const Header: FC = () => {
         onScroll();
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
-
+    const pathname = usePathname();
     return (
         <>
             {/* ===== TOP BAR ===== */}
@@ -112,22 +114,35 @@ const Header: FC = () => {
             </header>
 
             {/* ===== NAVBAR (Sticky) ===== */}
-            {/* ===== NAVBAR (Sticky) ===== */}
             <section className="bg-white shadow-md sticky top-0 z-50">
                 <nav className="max-w-7xl mx-auto px-4 md:px-2 py-4">
                     <div className="flex justify-between items-center">
                         {/* Desktop links */}
                         <div className="hidden lg:flex flex-1 justify-center gap-x-12">
-                            {navItems[language].map((item) => (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className={`text-gray-700 hover:text-blue-600 font-medium text-xl ${language === "kh" ? "khmer-font" : ""
-                                        }`}
-                                >
-                                    {item.label}
-                                </Link>
-                            ))}
+                            {navItems[language].map((item) => {
+                                const isActive = pathname === item.href;
+
+                                return (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className={`relative pb-1 font-medium text-xl transition-colors
+                                            ${isActive ? "text-black" : "text-gray-700 hover:text-blue-600"}
+                                            ${language === "kh" ? "khmer-font" : ""}
+                                        `}
+                                    >
+                                        {item.label}
+
+                                        {/* underline */}
+                                        <span
+                                            className={`absolute left-0 -bottom-1 h-[3px] bg-orange-500 transition-all duration-300
+                                                ${isActive ? "w-full" : "w-0"}
+                                            `}
+                                        />
+                                    </Link>
+                                );
+                            })}
+
                         </div>
 
                         {/* Mobile menu title */}
@@ -159,7 +174,7 @@ const Header: FC = () => {
                                         aria-label="Language"
                                     >
                                         <Globe className="w-4 h-4" />
-                                        {language === "en" ? "EN" : "KH"}
+                                        {language === "en" ? "EN" : "ខ្មែរ"}
                                     </button>
                                 </>
                             )}

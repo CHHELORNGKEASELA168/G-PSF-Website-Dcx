@@ -3,7 +3,7 @@
 
 import { useLanguage } from "@/app/context/LanguageContext";
 
-const PLACEHOLDER_IMAGE_URL = "/image/Bannerpdf.bmp";
+const PLACEHOLDER_IMAGE_URL = "/image/bannerpdf.bmp";
 
 const Bannerpdf: React.FC = () => {
     const { language } = useLanguage(); // get current language
@@ -11,11 +11,11 @@ const Bannerpdf: React.FC = () => {
     const topLine =
         language === "en"
             ? "Get the G-PSF Policy Brief."
-            : "កន្លែងរបស់អ្នកនៅលើតុពិភាក្សាការកែទម្រង់កំពូលរបស់កម្ពុជា។";
+            : "ទទួលបានឯកសារសង្ខេបគោលនយោបាយ G-PSF";
     const buttonLabel =
         language === "en"
             ? "Download PDF"
-            : "កំណែទម្រង់ឌីជីថលចុងក្រោយ";
+            : "ទាញយក PDF";
 
     return (
         <div className="relative mb-0 opacity-110 min-h-130 flex flex-col items-center justify-start overflow-hidden bg-gray-100">

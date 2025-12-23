@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
 
     return (
         <footer className="bg-white mt-0 shadow-[0_-6px_12px_rgba(0,0,0,0.08)]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-28">
                 {/* ========== LOGO + DESCRIPTION ========== */}
                 <div>
                     <div className="relative w-60 h-20 mb-4">
@@ -60,13 +60,13 @@ const Footer: React.FC = () => {
                         />
                     </div>
 
-                    <p className={`text-base text-gray-800 max-w-sm mb-3 ${isKhmer ? "khmer-font" : ""}`}>
+                    <p className={`text-lg text-gray-800 max-w-sm mb-3 ${isKhmer ? "khmer-font" : ""}`}>
                         {isKhmer
                             ? "អត្ថបទគំរូសម្រាប់ពិពណ៌នាពីបេសកកម្ម និងតួនាទីរបស់ G-PSF។"
                             : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh."}
                     </p>
 
-                    <p className={`text-base text-gray-800 max-w-sm ${isKhmer ? "khmer-font" : ""}`}>
+                    <p className={`text-lg text-gray-800 max-w-sm ${isKhmer ? "khmer-font" : ""}`}>
                         {isKhmer
                             ? "អត្ថបទគំរូបន្ថែម សម្រាប់ពិពណ៌នាពីការងារជាមួយវិស័យឯកជន។"
                             : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh."}
@@ -82,18 +82,18 @@ const Footer: React.FC = () => {
                 {/* ========== CONTACT + SOCIAL ========== */}
                 <div className="space-y-6">
                     <div>
-                        <h3 className={`text-lg font-bold mb-3 ${isKhmer ? "khmer-font" : ""}`}>
+                        <h3 className={`text-2xl font-bold mb-3 ${isKhmer ? "khmer-font" : ""}`}>
                             {isKhmer ? "ទំនាក់ទំនង" : "CONTACT"}
                         </h3>
 
                         <div className="space-y-3 text-gray-700">
-                            <ContactItem icon={<Phone size={18} />} text="+855 999 999 999" />
+                            <ContactItem icon={<Phone size={18} />} text="+855 999 999 999"/>
                             <ContactItem icon={<Mail size={18} />} text="info@website.gov.kh" />
                         </div>
                     </div>
 
-                    <div>
-                        <h3 className={`text-lg font-bold mb-3 ${isKhmer ? "khmer-font" : ""}`}>
+                    <div className="mt-18">
+                        <h3 className={`text-2xl font-bold mb-3 ${isKhmer ? "khmer-font" : ""}`}>
                             {isKhmer ? "តាមដានពួកយើង" : "FOLLOW US"}
                         </h3>
 
@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
 /* ================= COMPONENTS ================= */
 
 const ContactItem = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
-    <div className="flex items-center gap-2 text-base font-medium">
+    <div className="flex items-center gap-2 text-xl font-medium">
         <span className="text-[#00008b]">{icon}</span>
         <span>{text}</span>
     </div>
@@ -119,16 +119,16 @@ const ContactItem = ({ icon, text }: { icon: React.ReactNode; text: string }) =>
 
 const LinkSection = ({ group, isKhmer }: { group: LinkGroup; isKhmer: boolean }) => (
     <div>
-        <h3 className={`text-lg font-bold mb-4 ${isKhmer ? "khmer-font" : ""}`}>
+        <h3 className={`text-2xl font-bold mb-4 ${isKhmer ? "khmer-font" : ""}`}>
             {isKhmer ? group.titleKh : group.titleEn}
         </h3>
 
-        <ul className="space-y-2">
+        <ul className="space-y-3">
             {group.links.map((link) => (
-                <li key={link.nameEn}>
+                <li key={link.nameEn} >
                     <a
                         href={link.href}
-                        className={`text-base text-gray-700 hover:text-[#00008b] transition ${isKhmer ? "khmer-font" : ""
+                        className={`text-xl text-gray-700 hover:text-[#00008b] transition ${isKhmer ? "khmer-font" : ""
                             }`}
                     >
                         {isKhmer ? link.nameKh : link.nameEn}

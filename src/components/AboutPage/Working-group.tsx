@@ -2,6 +2,9 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/app/context/LanguageContext";
+
+type Lang = "en" | "kh";
 
 type Slide = {
     id: number;
@@ -9,41 +12,62 @@ type Slide = {
     backgroundImage: string;
     ctaText: string;
     href?: string;
-    bgPos?: string; // e.g. "center", "top", "center 30%"
+    bgPos?: string;
 };
 
 export default function WorkingGroup() {
-    const slides = useMemo<Slide[]>(
-        () => [
-            {
-                id: 1,
-                title: "Explore the Working Groups driving reform",
-                backgroundImage: "/image/banner-g.bmp", // ✅ recommend convert bmp -> webp/jpg
-                ctaText: "View Working Groups",
-            },
-            {
-                id: 2,
-                title: "Explore the Working Groups driving reform",
-                backgroundImage:
-                    "/image/banner.bmp",
-                ctaText: "View Working Groups",
-            },
-            {
-                id: 3,
-                title: "Explore the Working Groups driving reform",
-                backgroundImage:
-                    "/image/BannerAbout.bmp",
-                ctaText: "View Working Groupse",
-            },
-        ],
-        []
-    );
-
-    const [current, setCurrent] = useState(0);
+    const { language } = useLanguage();
+    const lang = (language as Lang) ?? "en";
 
     // ✅ stable className (NO multiline template string -> no hydration mismatch)
     const sectionClass =
         "relative w-full overflow-hidden h-[55vh] min-h-[360px] sm:h-[60vh] sm:min-h-[420px] lg:h-[70vh] lg:min-h-[520px]";
+
+    // ✅ build slides based on language
+    const slides = useMemo<Slide[]>(() => {
+        const content = {
+            en: {
+                title: "Explore the Working Groups driving reform",
+                cta: "View Working Groups",
+            },
+            kh: {
+                title: "ស្វែងយល់អំពីក្រុមការងារ (WGs) ដែលជួយជំរុញការកែទម្រង់",
+                cta: "មើលក្រុមការងារ",
+            },
+        }[lang];
+
+        return [
+            {
+                id: 1,
+                title: content.title,
+                backgroundImage: "/image/Banner-g.bmp",
+                ctaText: content.cta,
+                href: "/working-groups",
+            },
+            {
+                id: 2,
+                title: content.title,
+                backgroundImage: "/image/Banner.bmp",
+                ctaText: content.cta,
+                href: "/working-groups",
+            },
+            {
+                id: 3,
+                title: content.title,
+                backgroundImage: "/image/BannerAbout.bmp",
+                ctaText: content.cta,
+                href: "/working-groups",
+            },
+        ];
+    }, [lang]);
+
+    const [current, setCurrent] = useState(0);
+
+    // ✅ keep current index valid when language changes (slides re-memoized)
+    useEffect(() => {
+        // ======Not=====
+        // setCurrent(0); 
+    }, [lang]);
 
     // Auto-advance
     useEffect(() => {
@@ -78,7 +102,10 @@ export default function WorkingGroup() {
                         >
                             <div className="mx-auto min-h-screen flex items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8 pb-[130px]">
                                 <div className="max-w-5xl">
-                                    <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+                                    <h1
+                                        className={`text-3xl font-bold tracking-tight text-white sm:text-5xl ${lang === "kh" ? "khmer-font" : ""
+                                            }`}
+                                    >
                                         {s.title}
                                     </h1>
 
@@ -86,14 +113,16 @@ export default function WorkingGroup() {
                                         {s.href ? (
                                             <Link
                                                 href={s.href}
-                                                className="inline-flex items-center justify-center rounded-xl bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2"
+                                                className={`inline-flex items-center justify-center rounded-xl bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 ${lang === "kh" ? "khmer-font" : ""
+                                                    }`}
                                             >
                                                 {s.ctaText}
                                             </Link>
                                         ) : (
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center justify-center rounded-xl bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2"
+                                                className={`inline-flex cursor-pointer items-center justify-center rounded-xl bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 ${lang === "kh" ? "khmer-font" : ""
+                                                    }`}
                                             >
                                                 {s.ctaText}
                                             </button>
