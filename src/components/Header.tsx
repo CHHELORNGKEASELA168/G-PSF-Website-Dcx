@@ -82,7 +82,7 @@ const Header: FC = () => {
                         <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
                             <button
                                 onClick={toggleLanguage}
-                                className={`flex items-center gap-1 px-3 py-1 rounded-full border text-sm md:text-lg ${language === "kh" ? "khmer-font" : ""
+                                className={`flex items-center cursor-pointer gap-1 px-3 py-1 rounded-full border text-sm md:text-lg ${language === "kh" ? "khmer-font" : ""
                                     }`}
                                 type="button"
                             >
@@ -97,7 +97,7 @@ const Header: FC = () => {
                                     className="flex-1 px-3 py-1 text-sm md:text-lg bg-gray-200 outline-none"
                                 />
                                 <button className="px-3 bg-white" type="button">
-                                    <Search className="w-5 h-5 text-gray-500" />
+                                    <Search className="w-5 h-5 text-gray-500 cursor-pointer" />
                                 </button>
                             </div>
 
@@ -160,7 +160,7 @@ const Header: FC = () => {
                                 <>
                                     <button
                                         onClick={() => setIsSearchOpen((s) => !s)}
-                                        className="p-2 rounded-md hover:bg-gray-100"
+                                        className="p-2 rounded-md hover:bg-gray-100 cursor-pointer"
                                         type="button"
                                         aria-label="Search"
                                     >
@@ -169,7 +169,7 @@ const Header: FC = () => {
 
                                     <button
                                         onClick={toggleLanguage}
-                                        className="flex items-center gap-1 px-2 py-1 border rounded-md text-sm hover:bg-gray-50"
+                                        className="flex items-center gap-1 px-2 py-1 cursor-pointer border rounded-md text-sm hover:bg-gray-50"
                                         type="button"
                                         aria-label="Language"
                                     >
