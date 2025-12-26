@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
 /* ================= COMPONENTS ================= */
 
 const ContactItem = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
-    <div className="flex items-center gap-2 text-xl font-medium">
+    <div className="flex items-center gap-2 text-sm font-medium">
         <span className="text-[#00008b]">{icon}</span>
         <span>{text}</span>
     </div>
