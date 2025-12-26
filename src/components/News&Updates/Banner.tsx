@@ -31,7 +31,7 @@ const NewUpdate = ({
     return (
         <section className="bg-white py-5 md:py-13">
             {/* Title + subtitle */}
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-10">
                     <h1
                         className={`text-3xl text-shadow-lg sm:text-5xl font-bold text-gray-900 ${language === "kh" ? "khmer-font" : ""
@@ -51,7 +51,7 @@ const NewUpdate = ({
 
             {/* FULL-WIDTH BANNER */}
             <div className="w-full">
-                <div className="relative w-full h-[240px] sm:h-[360px] md:h-[480px] lg:h-[675px]">
+                <div className="relative w-full mt-20 h-[240px] sm:h-[360px] md:h-[480px] lg:h-[675px] shadow-[0_-15px_30px_rgba(0,0,0,0.20),0_15px_30px_rgba(0,0,0,0.20)]">
                     <Image
                         src={imageUrl}
                         alt={imageAlt}

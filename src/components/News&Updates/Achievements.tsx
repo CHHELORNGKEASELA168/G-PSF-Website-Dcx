@@ -30,14 +30,14 @@ const Achievements: React.FC = () => {
                     {/* HEADER SECTION */}
                     <div className="w-full">
                         <p
-                            className={`text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wider ${isKh ? "khmer-font normal-case" : ""
+                            className={`text-gray-900 font-bold text-xl mb-1 ${isKh ? "khmer-font normal-case" : ""
                                 }`}
                         >
                             {t.small}
                         </p>
 
                         <h1
-                            className={`text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight ${isKh ? "khmer-font" : ""
+                            className={`text-[#1a2b4b] text-5xl font-black mb-6 ${isKh ? "khmer-font" : ""
                                 }`}
                         >
                             {t.title}

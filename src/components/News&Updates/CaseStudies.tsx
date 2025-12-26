@@ -40,11 +40,11 @@ const CaseStudies = () => {
                                     Group Name ]
                                 </span>
                             </div>
-                            <h3 className="text-[#1a2b4b] text-4xl font-black mb-4 uppercase">Article Headline</h3>
+                            <h3 className="text-[#1a2b4b] text-4xl font-black mb-4">Article Headline</h3>
                             <p className="text-gray-700 text-sm leading-relaxed mb-8 max-w-md">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.
                             </p>
-                            <button className="text-[#1a2b4b] text-xs font-bold flex items-center hover:underline uppercase tracking-widest">
+                            <button className="text-[#1a2b4b] text-xs font-bold flex items-center hover:underline tracking-widest">
                                 Download <span className="ml-2 text-lg leading-none">›</span>
                             </button>
                         </div>
@@ -57,11 +57,11 @@ const CaseStudies = () => {
                                 <div className="text-[#1a2b4b] text-[10px] font-bold mb-3 uppercase tracking-tighter">
                                     [ Working Group Name ]
                                 </div>
-                                <h3 className="text-[#1a2b4b] text-3xl font-black mb-4 uppercase">Article Headline</h3>
+                                <h3 className="text-[#1a2b4b] text-3xl font-black mb-4">Article Headline</h3>
                                 <p className="text-gray-700 text-sm leading-relaxed mb-8 max-w-sm">
                                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.
                                 </p>
-                                <button className="text-[#1a2b4b] text-xs font-bold flex items-center hover:underline uppercase tracking-widest mt-auto">
+                                <button className="text-[#1a2b4b] text-xs font-bold flex items-center hover:underline tracking-widest mt-auto">
                                     Download <span className="ml-2 text-lg leading-none">›</span>
                                 </button>
                             </div>
